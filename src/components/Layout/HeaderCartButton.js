@@ -5,7 +5,7 @@ import classes from './HeaderCartButton.module.css';
 import CartIcon from '../Cart/CartIcon'
 import CartContext from "../../store/cart-context";
  
-let numberOfCartItems=0;
+// let numberOfCartItems=0;
 const HeaderCartButton = (props) => {
     
 
@@ -16,14 +16,18 @@ const HeaderCartButton = (props) => {
     const {items} = cartCtx;
 
     const {totalAmount} = cartCtx;
-    useEffect(() => {
-        console.log("totalamounmt "+ totalAmount)
-        if(items.length===1){
-            numberOfCartItems= totalAmount
-        }
-        numberOfCartItems= totalAmount+1
-        console.log("bucart "+ numberOfCartItems)
-    }, [items])
+
+    const numberOfCartItems = items.reduce((curNumber, item) => {
+        return curNumber + totalAmount;
+    }, 0)
+    // useEffect(() => {
+    //     console.log("totalamounmt "+ totalAmount)
+    //     if(items.length===1){
+    //         numberOfCartItems= totalAmount
+    //     }
+    //     numberOfCartItems= totalAmount+1
+    //     console.log("numberOfCartItems "+ numberOfCartItems)
+    // }, [items])
     
 
      const btnClasses = `${classes.button} ${buttonIsHighlighted ? classes.bump: ''}`;
@@ -55,7 +59,7 @@ const HeaderCartButton = (props) => {
             </span>
             <span className={classes.badge}>
             {numberOfCartItems}
-            {/* {console.log(numberOfCartItems)} */}
+            {console.log("numberOfCartItems2 "+ numberOfCartItems)}
             </span>
         </button>
     )

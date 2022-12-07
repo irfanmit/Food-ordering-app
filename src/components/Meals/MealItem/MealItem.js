@@ -11,6 +11,7 @@ const MealItem = (props) => {
 
 
     const  onAddCartHandler = (amount) => {
+        console.log("amount in cart " + amount )
         Cartctx.addItem({
             id: props.id,
             name: props.name,

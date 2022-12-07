@@ -5,20 +5,31 @@ import classes from './HeaderCartButton.module.css';
 import CartIcon from '../Cart/CartIcon'
 import CartContext from "../../store/cart-context";
  
-
+let numberOfCartItems=0;
 const HeaderCartButton = (props) => {
+    
 
     const [buttonIsHighlighted, setButtonIsHighlighted] = useState(false);
+
     const cartCtx = useContext(CartContext);
+
     const {items} = cartCtx;
 
-    const numberOfCartItems = items.reduce((curNumber, item) => {
-        return curNumber + item.amount;
-    }, 0);
+    const {totalAmount} = cartCtx;
+    useEffect(() => {
+        console.log("totalamounmt "+ totalAmount)
+        if(items.length===1){
+            numberOfCartItems= totalAmount
+        }
+        numberOfCartItems= totalAmount+1
+        console.log("bucart "+ numberOfCartItems)
+    }, [items])
+    
 
      const btnClasses = `${classes.button} ${buttonIsHighlighted ? classes.bump: ''}`;
 
     useEffect(() => {
+      
         if(items.length===0){
             return;
         }
@@ -44,7 +55,7 @@ const HeaderCartButton = (props) => {
             </span>
             <span className={classes.badge}>
             {numberOfCartItems}
-            {console.log(numberOfCartItems)}
+            {/* {console.log(numberOfCartItems)} */}
             </span>
         </button>
     )

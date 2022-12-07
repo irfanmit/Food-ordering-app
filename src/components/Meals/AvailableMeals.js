@@ -40,18 +40,15 @@ const DUMMY_MEALS = [
     name =  {meal.name} 
     description = {meal.description} 
     price = {meal.price}
-
     />
     ));
 
     return (
       
         <section className={classes.meals}>
-         
           <Card>
                 <ul> {mealsList} </ul>
-           </Card>
-            
+           </Card>   
         </section>
         
     )

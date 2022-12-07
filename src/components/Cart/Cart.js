@@ -8,16 +8,22 @@ import CartItem from './CartItem';
 const Cart = (props) => {
 
     const cartCtx = useContext(CartContext);
-    const {totalPrice} = cartCtx
-    const totalAmount = `$$cartCtx.totalAmount.toFixed(2)`;
+    const {items} = cartCtx
 
-    const hasItems = cartCtx.items.legth>0;
+    // const totalAmount = `$$cartCtx.totalAmount.toFixed(2)`;
+    const totalPrice = items.reduce((curNumber, item) => {
+      return curNumber + item.price * item.amount;
+  }, 0)
+  
+    const hasItems = cartCtx.items.length;
 
-    const cartItemRemoveHandler = (id) => {}
+    const cartItemRemoveHandler = (id) => {
+      cartCtx.removeItem(id);
+    }
 
     const cartItemAddHandler = (item) => {
       
-      cartCtx.addItem({...item, amount: 1})
+      cartCtx.addItem({...item, amount: 1});  
     }
 
     const cartItems = (
@@ -40,12 +46,13 @@ const Cart = (props) => {
          {cartItems}
          <div className={classes.total}>
             <span>Total</span>
-            <span>{35.62}</span>
+            <span>{totalPrice}</span>
+            
          </div>
 
          <div className={classes.actions}>
-          <button className={classes['button--alt']} onClick = {props.hideCart} >Close</button>    
-          {hasItems && <button className={classes.button}>Order</button>}
+          <button className={classes['button--alt']} onClick = {props.hideCart}>Close</button>    
+          {hasItems && <button className={classes.button}> Order </button>}
          </div>
     </Modal>
 

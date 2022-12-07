@@ -18,7 +18,7 @@ const HeaderCartButton = (props) => {
     const {totalAmount} = cartCtx;
 
     const numberOfCartItems = items.reduce((curNumber, item) => {
-        return curNumber + totalAmount;
+        return curNumber + item.amount;
     }, 0)
     // useEffect(() => {
     //     console.log("totalamounmt "+ totalAmount)

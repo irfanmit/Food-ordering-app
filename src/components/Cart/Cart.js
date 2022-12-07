@@ -8,7 +8,7 @@ import CartItem from './CartItem';
 const Cart = (props) => {
 
     const cartCtx = useContext(CartContext);
-
+    const {totalPrice} = cartCtx
     const totalAmount = `$$cartCtx.totalAmount.toFixed(2)`;
 
     const hasItems = cartCtx.items.legth>0;
